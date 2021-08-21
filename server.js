@@ -1,32 +1,19 @@
 const express =require('express');
 const mysql= require('mysql2');
-
+const sequelize = require('./config/connection');
+//const routes = require('./routes');
 
 const PORT=process.env.PORT || 3001;
 const app=express();
 
 
-app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-const db=mysql.createConnection(
-{
-  host:'localhost',
-  user:'root',
-  password:'0468757314Ivan$',
-  database:'employee_manager_db'
-},
+// turn on routes
+app.use(routes);
 
-console.log('connected to the employee_manager_db database')
-);
-
-app.use((req, res) => {
-    res.status(404).end();
-  });
-  
-
-
-app.listen(PORT,()=>{
-
-    console.log(`server running on port ${PORT}`);
+// turn on connection to db and server
+sequelize.sync({ force: false }).then(() => {
+  app.listen(PORT, () => console.log('Now listening'));
 });
