@@ -225,7 +225,7 @@ function viewRoles(){
             
 
       })
-    }//
+    }
 
   }).catch((err) => console.log(err))
     
@@ -314,7 +314,7 @@ function viewRoles(){
         }
       });
        });
-    
+      }
 
    function addDepartmentsql(name_department){
     return new Promise(function(resolve,reject){
@@ -350,13 +350,13 @@ function viewRoles(){
           Menu();
     })
 
-     }).catch((err) => console.log(err))
+     }).catch((err) => console.log(err));
     }
 
     
 
 
-
+  
 
 
 
@@ -386,10 +386,4 @@ function viewRoles(){
   
   
   
-  
-  
-
-    }
-
-
-Menu();
+  Menu();
