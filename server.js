@@ -242,7 +242,6 @@ function viewRoles(){
           return reject(err);
       }else{
       // console.log(result);
-        return resolve(result);
         
     
       }
@@ -319,7 +318,7 @@ function viewRoles(){
    function addDepartmentsql(name_department){
     return new Promise(function(resolve,reject){
      const sql='INSERT INTO department (name_department) VALUES (?)'
-     DB_DATABASE.query(sql,[name_department],function(err,result){
+     db.query(sql,[name_department],function(err,result){
       if(err)
       {
         return reject(err)
@@ -333,17 +332,17 @@ function viewRoles(){
     })
   }
 
- function addDepartment(){
+ async function addDepartment(){
        
     inquirer.prompt([
       {
       type: "input",
       message: "Enter Department's name",
       name: "name_department"
-      }
+      },
     ])
     .then( async function(data) {
-     
+         //console.log(data.name_department);
         addDepartmentsql(data.name_department)
      .then(function() {
          console.log("\n");
