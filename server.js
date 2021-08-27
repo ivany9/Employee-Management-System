@@ -2,6 +2,7 @@ const mysql = require('mysql2');
 require("dotenv").config();
 const inquirer=require('inquirer');
 const table = require('console.table');
+const { cloneDeep } = require('sequelize/types/lib/utils');
 // const Department=require("./lib/Department");
 // const Employee=require("./lib/Employee");
 // const Roles=require("./lib/Roles");
@@ -92,7 +93,7 @@ function  Menu(){
       
              case 'Add Role':
             
-              viewRoles();    
+              addRole();    
               console.log("\n");
                break;      
          
@@ -242,7 +243,7 @@ function viewRoles(){
           return reject(err);
       }else{
       // console.log(result);
-        
+      return resolve(result);
     
       }
     });
@@ -269,24 +270,24 @@ function viewRoles(){
     
       }
      
-      // function getDepartment(){
+      function getDepartment(){
       
-      //   return new Promise(function(resolve,reject){
-      //     const sql='SELECT name_department FROM department'
-      //     db.query(sql,function(err,result){
+        return new Promise(function(resolve,reject){
+          const sql='SELECT id,name_department FROM department'
+          db.query(sql,function(err,result){
           
-      //       if (err) {
-      //         return reject(err);
-      //     }else{
+            if (err) {
+              return reject(err);
+          }else{
                
-      //       return resolve(result);
+            return resolve(result);
             
         
-      //     }
-      //   });
-      //    });
+          }
+        });
+         });
       
-      //   }
+        }
          
 
 
@@ -355,10 +356,68 @@ function viewRoles(){
     
 
 
-  
+  async function addRole(){
+
+    
+    let departmentArray= await getDepartment();
+    departmentArray= departmentArray.map(x=>x.name_department)
+    inquirer.prompt([
+      {
+      type: "input",
+      message: "Enter Title's name",
+      name: "title"
+      },
+      {
+        type: "input",
+        message: "Enter Salary",
+        name: "salary"
+        },
+        {
+          type: "list",
+          message: "Enter Department's name",
+          choices: departmentArray,
+          name: "name_department"
+          },
+    ])
+    .then( async function(data) {
+      //console.log(data.name_department);
+      let department_id=departmentArray.indexOf(data.title,data.salary,data.name_department); 
+      department_id=department_id+1;
+     addRolesql(data.title,data.salary,department_id);
+    })
+  .then(function() {
+      console.log("\n");
+       Menu();
+ }).catch((err) => console.log(err));
+
+
+  }
+
+
+function addRolesql(title,salary,department_id){
+  //console.log("departamanto id en el sql "+department_id);
+  return new Promise(function(resolve,reject){
+    const sql='INSERT INTO roles (title,salary,department_id) VALUES (?,?,?)'
+    db.query(sql,[title,salary,department_id],function(err,result){
+     if(err)
+     {
+       return reject(err)
+     }
+       else {
+       console.log("Role  Succesfully added")
+       return resolve();
+       }
+    })
+
+   })
 
 
 
+
+
+
+
+}
 
 
 
