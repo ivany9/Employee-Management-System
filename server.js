@@ -2,7 +2,7 @@ const mysql = require('mysql2');
 require("dotenv").config();
 const inquirer=require('inquirer');
 const table = require('console.table');
-const { cloneDeep } = require('sequelize/types/lib/utils');
+//const { cloneDeep } = require('sequelize/types/lib/utils');
 // const Department=require("./lib/Department");
 // const Employee=require("./lib/Employee");
 // const Roles=require("./lib/Roles");
@@ -377,11 +377,11 @@ function viewRoles(){
           message: "Enter Department's name",
           choices: departmentArray,
           name: "name_department"
-          },
+          }
     ])
     .then( async function(data) {
       //console.log(data.name_department);
-      let department_id=departmentArray.indexOf(data.title,data.salary,data.name_department); 
+      let department_id=departmentArray.indexOf(data.name_department); 
       department_id=department_id+1;
      addRolesql(data.title,data.salary,department_id);
     })
@@ -410,6 +410,7 @@ function addRolesql(title,salary,department_id){
     })
 
    })
+  }
 
 
 
@@ -417,7 +418,6 @@ function addRolesql(title,salary,department_id){
 
 
 
-}
 
 
 
