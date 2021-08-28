@@ -1,4 +1,4 @@
-# 🥇 Employee Manager
+# 🥇 Employee Management
 
 
 
@@ -21,7 +21,7 @@
 ##  Description
     
  ## Actual Behaviour
- The Employee Manager App is a command line app that allows the user to manipulate data from a sql database. The user can call differents scenarios  as you can see in the bash description, you can wiew employee table, Department table, roles table, add employees, add deparments, add roles, update Managers and roles, also you can delete a employer. 
+ The Employee Management App is a command line app that allows the user to manipulate data from a sql database. The user can call differents scenarios  as you can see in the bash description, you can wiew employee table, Department table, roles table, add employees, add deparments, add roles, update Managers and roles, also you can delete a employer. 
 
 
 
