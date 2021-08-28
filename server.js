@@ -2,9 +2,7 @@ const mysql = require('mysql2');
 require("dotenv").config();
 const inquirer=require('inquirer');
 const table = require('console.table');
-// const Department=require("./lib/Department");
-// const Employee=require("./lib/Employee");
-// const Roles=require("./lib/Roles");
+const Font = require('ascii-art-font');
 
 const db = mysql.createConnection(
     {
@@ -31,14 +29,14 @@ function  Menu(){
           "Add Employee",
           "Add Department",
           "Add Role",
-          "Update employee Role",
-          "Update manager",
+          "Update Employee Role",
+          "Update Manager",
           "Display employees by manager",
           "Delete an employee",
           "Delete a role",
           "Delete a department",
           "View utilized budget for a department",
-          "Quit"
+          "Exit"
       ],
   
          name:"choice"
@@ -96,11 +94,33 @@ function  Menu(){
               console.log("\n");
                break;      
          
-               case 'Update employee Role':
+               case 'Update Employee Role':
             
                 updaterole();    
                 console.log("\n");
                  break;      
+
+                 case 'Update Manager':
+            
+                updateManager();    
+                console.log("\n");
+                 break;
+                  
+                 
+                 case 'Delete an employee':
+            
+                  deleteEmployee();    
+                  console.log("\n");
+                   break;
+
+
+
+
+                 case 'Exit':
+                
+                  console.log("Closing the app.....");
+                  process.exit();      
+  
 
          
             }
@@ -459,7 +479,6 @@ async function updaterole(){
 
 function updaterolesql(employee_id,new_role){
 
-  console.log("salida en sql "+ employee_id,new_role);
   return new Promise(function(resolve,reject){
     const sql='UPDATE employee SET ? WHERE ?'
     db.query(sql,[{role_id:new_role},{id:employee_id}],function(err,result){
@@ -467,7 +486,7 @@ function updaterolesql(employee_id,new_role){
      {
        return reject(err)
      } else {
-       console.table(result);
+      console.log("Role Updated!");
       return resolve(result);
        
        
@@ -476,12 +495,64 @@ function updaterolesql(employee_id,new_role){
       })
     })
 
-  // })
 
 
 
+}
 
 
+async function updateManager(){
+
+ 
+  let managerArray= await getManagers();
+    managerArray= managerArray.map(y=>y.manager)
+
+  
+  inquirer.prompt([
+    {
+    type: "input",
+    message: "Employee's id",
+    name: "employee_id"
+    },
+
+      {
+        type: "list",
+        message: "Enter New Role",
+        choices: managerArray,
+        name: "manager_update"
+        }
+  ])
+  .then( async function(data) {
+    let manager_id=managerArray.indexOf(data.manager_update); 
+    manager_id=manager_id+1;
+    updateManagersql(data.employee_id,manager_id);
+  })
+.then(function() {
+    console.log("\n");
+     Menu();
+}).catch((err) => console.log(err));
+  
+}
+
+
+
+function updateManagersql(employee_id,newmanager_id){
+
+  return new Promise(function(resolve,reject){
+    const sql='UPDATE employee SET ? WHERE ?'
+    db.query(sql,[{manager_id:newmanager_id},{id:employee_id}],function(err,result){
+     if(err)
+     {
+       return reject(err)
+     } else {
+      console.log("Manager Updated!");
+      return resolve(result);
+       
+       
+           } 
+      
+      })
+    })
 
 
 
@@ -490,9 +561,53 @@ function updaterolesql(employee_id,new_role){
 
 
 
+  
+  
+function deleteEmployee(){
+
+ 
+inquirer.prompt([
+
+    {
+      type: "input",
+      message: "Employee id  to Delete",
+      name: "employee_id"
+      }
+])
+.then( async function(data) {
+  deleteEmployeesql(data.employee_id);
+})
+.then(function() {
+  console.log("\n");
+   Menu();
+}).catch((err) => console.log(err));
+
+}
+  
+  function deleteEmployeesql(employee_id){
+     console.log(employee_id);
+    return new Promise(function(resolve,reject){
+      const sql='DELETE FROM employee  WHERE id =?'
+      db.query(sql,[employee_id],function(err,result){
+       if(err)
+       {
+         return reject(err)
+       } else {
+        console.log("Employee Deleted!");
+        return resolve(result);
+         
+         
+             } 
+        
+        })
+      })
 
 
 
+
+
+
+  }
 
 
 
@@ -501,7 +616,7 @@ function updaterolesql(employee_id,new_role){
 
 
 
-      
+ init();     
 
    
 
@@ -511,10 +626,15 @@ function updaterolesql(employee_id,new_role){
    
   
   
+  function init(){
+    console.clear();
+    Font.create('Employee  Manager', 'Doom', (err, result) => {
+      if (err) throw err;
+      console.log(result);
+     
+  })
   
-  
-  
-  
-  
-  
-  Menu();
+    Menu();
+    console.clear();
+
+}

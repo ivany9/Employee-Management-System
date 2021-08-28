@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/ivany9/Employee-Management-System#readme",
   "dependencies": {
+    "ascii-art": "^2.8.5",
     "console.table": "^0.10.0",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
