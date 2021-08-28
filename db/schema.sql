@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS employee (
   manager_id INT,
   PRIMARY KEY (id),
  FOREIGN KEY (manager_id)
-    REFERENCES employee(id)
+    REFERENCES employee(id),
   FOREIGN KEY (role_id)
   REFERENCES roles(id)
   ON DELETE SET NULL
