@@ -31,11 +31,7 @@ function  Menu(){
           "Add Role",
           "Update Employee Role",
           "Update Manager",
-          "Display employees by manager",
           "Delete an employee",
-          "Delete a role",
-          "Delete a department",
-          "View utilized budget for a department",
           "Exit"
       ],
   
