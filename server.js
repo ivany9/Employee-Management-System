@@ -2,7 +2,6 @@ const mysql = require('mysql2');
 require("dotenv").config();
 const inquirer=require('inquirer');
 const table = require('console.table');
-//const { cloneDeep } = require('sequelize/types/lib/utils');
 // const Department=require("./lib/Department");
 // const Employee=require("./lib/Employee");
 // const Roles=require("./lib/Roles");
@@ -32,7 +31,7 @@ function  Menu(){
           "Add Employee",
           "Add Department",
           "Add Role",
-          "Update employee role",
+          "Update employee Role",
           "Update manager",
           "Display employees by manager",
           "Delete an employee",
@@ -97,6 +96,12 @@ function  Menu(){
               console.log("\n");
                break;      
          
+               case 'Update employee Role':
+            
+                updaterole();    
+                console.log("\n");
+                 break;      
+
          
             }
   
@@ -414,6 +419,74 @@ function addRolesql(title,salary,department_id){
 
 
 
+async function updaterole(){
+  let roleTitleArray= await getRoles();
+  roleTitleArray= roleTitleArray.map(x=>x.title)
+  
+  inquirer.prompt([
+    {
+    type: "input",
+    message: "Employee's id",
+    name: "employee_id"
+    },
+
+      {
+        type: "list",
+        message: "Enter New Role",
+        choices: roleTitleArray,
+        name: "role_update"
+        }
+  ])
+  .then( async function(data) {
+    //console.log(data.name_department);
+    let role_id=roleTitleArray.indexOf(data.role_update); 
+    role_id=role_id+1;
+    updaterolesql(data.employee_id,role_id);
+  })
+.then(function() {
+    console.log("\n");
+     Menu();
+}).catch((err) => console.log(err));
+  
+
+
+
+
+
+
+}
+
+
+function updaterolesql(employee_id,new_role){
+
+  console.log("salida en sql "+ employee_id,new_role);
+  return new Promise(function(resolve,reject){
+    const sql='UPDATE employee SET ? WHERE ?'
+    db.query(sql,[{role_id:new_role},{id:employee_id}],function(err,result){
+     if(err)
+     {
+       return reject(err)
+     } else {
+       console.table(result);
+      return resolve(result);
+       
+       
+           } 
+      
+      })
+    })
+
+  // })
+
+
+
+
+
+
+
+
+
+}
 
 
 
