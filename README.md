@@ -137,5 +137,10 @@ GitHub: (https://github.com/ivany9)
 
 ## MOCK-UP
 
-  ##  Tests
+![Schema Sql](https://user-images.githubusercontent.com/83906297/131209874-c8679236-37c1-4d0b-b7cb-b37f43dd538d.gif)
+![video](https://user-images.githubusercontent.com/83906297/131209879-c4edc86c-9b42-4a7e-91c1-6ee077042289.gif)
+
+
+
+  ##  Testse
    
