@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 # 🥇 Employee Management System
+=======
+# 🥇 Employee Management
+>>>>>>> b2f041c7293f68345d7ce339629060d3976b01dd
 
 
 
@@ -21,7 +25,7 @@
 ##  Description
     
  ## Actual Behaviour
- The Employee Manager App is a command line app that allows the user to manipulate data from a sql database. The user can call differents scenarios  as you can see in the bash description, you can wiew employee table, Department table, roles table, add employees, add deparments, add roles, update Managers and roles, also you can delete a employer. 
+ The Employee Management App is a command line app that allows the user to manipulate data from a sql database. The user can call differents scenarios  as you can see in the bash description, you can wiew employee table, Department table, roles table, add employees, add deparments, add roles, update Managers and roles, also you can delete a employer. 
 
 
 
@@ -137,5 +141,10 @@ GitHub: (https://github.com/ivany9)
 
 ## MOCK-UP
 
-  ##  Tests
+![Schema Sql](https://user-images.githubusercontent.com/83906297/131209874-c8679236-37c1-4d0b-b7cb-b37f43dd538d.gif)
+![video](https://user-images.githubusercontent.com/83906297/131209879-c4edc86c-9b42-4a7e-91c1-6ee077042289.gif)
+
+
+
+ 
    
