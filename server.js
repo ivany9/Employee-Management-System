@@ -624,7 +624,7 @@ inquirer.prompt([
   
   function init(){
     console.clear();
-    Font.create('Employee  Manager', 'Doom', (err, result) => {
+    Font.create('Employee  Management System', 'Doom', (err, result) => {
       if (err) throw err;
       console.log(result);
      
