@@ -1,9 +1,5 @@
 <<<<<<< HEAD
 # 🥇 Employee Management System
-=======
-# 🥇 Employee Management
->>>>>>> b2f041c7293f68345d7ce339629060d3976b01dd
-
 
 
 🎫 Table of Contents
