@@ -2,6 +2,10 @@
 # 🥇 Employee Management System
 
 
+
+# Walkthrough video 
+https://1drv.ms/v/s!Ap_psURWyWFqhzOratDxVNA5o1Rq?e=17FjeH
+
 🎫 Table of Contents
 
 -[Description](#Description)
